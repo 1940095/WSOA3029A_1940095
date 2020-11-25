@@ -193,7 +193,10 @@
   
   
     </script>
+    <br>
+    <br>
 
+    
     </div>
     </div>
 
@@ -205,8 +208,244 @@
 
     <div class="intro-text">
       <div class="cover2">
+
+        <svg id="viz2" width="1000" height="800"></svg>
+
+    <script>
+
+      let stressData2 = [
+        { x: 1, y: 0 },
+        { x: 2, y: 1 },
+        { x: 3, y: 0 },
+        { x: 4, y: 0 },
+        { x: 5, y: 0 },
+        { x: 6, y: 2 },
+        { x: 7, y: 0 },
+        { x: 8, y: 2 },
+        { x: 9, y: 3 },
+        { x: 10, y: 1 },
+        { x: 11, y: 6 },
+      ]
+  
+      let margin2 = 100;
+      let topMargin2 = 50;
+      let graphHeight2 = 600;
+      let viz2Area = d3.select("#viz2");
+      let xScale2 = d3.scaleLinear().domain([0, 12]).range([0, 600]);
+      let yScale2 = d3.scaleLinear().domain([0, 6]).range([graphHeight, 0]);
+      let valueline2 = d3.line().x(function (d) { return xScale(d.x + 2); }).y(function (d) { return yScale(d.y - 0.5); });
+  
+  
+      viz2Area
+        .append("g")
+        .attr("transform", `translate(${margin2}, ${graphHeight2 + topMargin})`)
+        .call(d3.axisBottom(xScale2));
+  
+  
+      viz2Area
+        .append("text")
+        .attr("transform", `translate(${margin2 + 300}, ${graphHeight2 + topMargin2 * 2})`)
+        .style("text-anchor", "middle")
+        .text("Month");
+  
+      viz2Area
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0)
+        .attr("x", 0 - (graphHeight2 -100))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Messages including the word 'stress'");
+      
+
+      viz2Area
+        .append("circle")
+        .attr("cx", xScale2(3))
+        .attr("cy", yScale2(0))
+        .attr("r", 0)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+      viz2Area
+        .append("circle")
+        .attr("cx", xScale2(4))
+        .attr("cy", yScale2(1))
+        .attr("r", 10)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+      viz2Area
+        .append("circle")
+        .attr("cx", xScale2(5))
+        .attr("cy", yScale2(1))
+        .attr("r", 0)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+      viz2Area
+        .append("circle")
+        .attr("cx", xScale2(6))
+        .attr("cy", yScale2(1))
+        .attr("r", 0)
+        .style("fill", "teal");
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(7))
+        .attr("cy", yScale2(1))
+        .attr("r", 0)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(8))
+        .attr("cy", yScale2(1))
+        .attr("r", 20)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(9))
+        .attr("cy", yScale2(1))
+        .attr("r", 0)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(10))
+        .attr("cy", yScale2(1))
+        .attr("r", 20)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(11))
+        .attr("cy", yScale2(1))
+        .attr("r", 30)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+        
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(12))
+        .attr("cy", yScale2(1))
+        .attr("r", 20)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+
+        viz2Area
+        .append("circle")
+        .attr("cx", xScale2(13))
+        .attr("cy", yScale2(1))
+        .attr("r", 60)
+        .style("fill", "teal")
+        .style("opacity", 0.5)
+  
+    </script>
+
         
       <article>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       <h1>Wireframe</h1>
       <a href="Interactive Media Layout (2).html">
         <img height=256 width=256 alt="Wireframe Image" src="img/IM Wireframe Image.png">
