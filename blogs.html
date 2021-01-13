@@ -4,6 +4,14 @@
 <head>
 
     <meta charset="utf-8">
+    <style>
+        .line {
+            fill: none;
+            stroke: teal;
+            stroke-width: 2px;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
     <title>Dawson's Blogs</title>
     <link rel="shortcut icon" type="image/png" href="img/C.png">
@@ -11,6 +19,8 @@
     <meta name="author" content="Dawson">
 
     <link rel="stylesheet" href="style.css">
+
+
 
 </head>
 
@@ -45,10 +55,203 @@
     </nav>
 
     <main>
+
         <section class="presentation">
 
             <div class="cover2">
-               
+
+            </div>
+            <div class="intro-text">
+                <br>
+                <br>
+                <h1>COVID-19 and Inequalities</h1>
+                <p>As a volunteer for 1Day Sooner, an organization dedicated to ending the coronavirus pandemic as soon
+                    as possible through advocacy and research work, and as a participant in the Oxford/AstraZeneca
+                    vaccine trial in South Africa, the issue of coronavirus vaccines is one not only important to my
+                    personal life and future wellbeing, it is also an issue I am doing my utmost to resolve in any way I
+                    can.
+                </p>
+                <br>
+
+                <p>I believe vaccines should first be given to those in the places that need the most help, where there
+                    are high and rising case numbers, regardless of their wealth. There have been many good and
+                    necessary conversations I have heard about which groups are at greatest risk, whose sacrifices we
+                    should honour, and who might unfairly be at the back of the line for receiving the vaccine. But most
+                    of what I have heard has been limited to a national conversation, and coronavirus is not a national
+                    problem. It is a global issue that requires looking beyond artificial borders, which a virus is not
+                    going to respect.
+                </p>
+                <br>
+                <p>It is clear from which countries are first vaccinating their citizens, that those with wealth and
+                    power have received quicker access to vaccines than those without. This just isn’t the fairest or
+                    most effective way to distribute vaccines. I’m personally very, very grateful that my friends and
+                    family in the United States will be getting access to vaccines soon, especially those who are
+                    nurses, frontline workers, and my grandparents who are elderly and have pre-existing conditions. But
+                    here in South Africa, it is quite likely that vaccines will not be available until the second
+                    quarter of 2021, and I am worried for my friends and family on this side of the Atlantic. The nation
+                    is currently in the middle of a second wave, and one quite possibly driven by new and more
+                    infectious variants of the coronavirus. As of January 12th, 2021, South Africa hit its highest daily
+                    cases number yesterday. There is hope that new lockdowns will slow the spread, but these kinds of
+                    solutions are temporary and ineffectual compared to the robust protections provided by vaccines. The
+                    people I know and love here don’t deserve any less protection than those in the United States. In
+                    fact, as South Africa is participating in the development of the Oxford/AstraZeneca vaccine, there
+                    is some merit to the idea that, even beyond dire need related to current case numbers, South Africa
+                    has contributed to the global solutions necessary to end the pandemic as soon as possible, and
+                    should have access to the fruits of its labours.</p>
+                <br>
+
+                <p>The fact is that today, dozens of Western nations have access to vaccines and are currently
+                    vaccinating their citizens, while no African nations have any access to vaccines at all. This
+                    glaring inequality is inexcusable, and a clear sign of how wealth and geopolitical power are
+                    dictating the rollout of vaccines needed around the world. To illustrate this difference more
+                    viscerally, I have created a data visualization which shows the average GDP per capita of each
+                    continent, and the percentage of countries within each continent which have access to coronavirus
+                    vaccines. This use of continents instead of individual countries provides insight into patterns
+                    which are occurring on a very large scale, and smooths out the noise that would be associated with a
+                    more granular approach. It also allows for the examination of patterns which map better onto
+                    continents than countries, such as interrogations of regional political power, and of viral spread,
+                    which often permeates individual borders with ease but can still produce regional patterns. But most
+                    importantly, this data visualization is a challenge to the idea that Western political power and
+                    wealth should dictate the terms upon which vaccines are distributed around the world.
+                </p>
+                <br>
+                <p>To end the pandemic as soon as possible, empathy is needed that extends beyond national borders,
+                    along with vision that recognizes we are all in this together. That means international vaccine
+                    distribution based on need, not on who’s the highest bidder.
+                </p>
+                <br>
+                <br>
+                <br>
+
+                <svg id="viz" width="800" height="800"></svg>
+
+                <script>
+                    let margin = 100;
+                    let topMargin = 5;
+
+                    let stressData = [
+                        { x: 1930, y: 0 },
+                        { x: 7350, y: 4 },
+                        { x: 8560, y: 17 },
+                        { x: 11290, y: 29 },
+                        { x: 29410, y: 58 },
+                        { x: 49240, y: 98 },
+                        { x: 53220, y: 0 },
+
+                    ]
+
+
+                    let graphHeight = 600;
+                    let vizArea = d3.select("#viz");
+                    let xScale = d3.scaleLinear().domain([0, 60000]).range([0, 600]);
+                    let yScale = d3.scaleLinear().domain([0, 100]).range([graphHeight, 0]);
+                    let valueline = d3.line().x(function (d) { return xScale(d.x + 2) + margin; }).y(function (d) { return yScale(d.y - 0.5); });
+
+                    vizArea
+                        .append("g")
+                        .attr("transform", `translate(${margin}, ${topMargin})`)
+                        .call(d3.axisLeft(yScale)
+                            .ticks(6));
+
+                    vizArea
+                        .append("g")
+                        .attr("transform", `translate(${margin}, ${graphHeight + topMargin})`)
+                        .call(d3.axisBottom(xScale));
+
+                    vizArea
+                        .selectAll('dots')
+                        .data(stressData)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", function (d) {
+                            return xScale(d.x + 4) + margin;
+                        })
+                        .attr("cy", function (d) {
+                            return yScale(d.y - 0.5);
+                        })
+                        .attr("r", 7)
+                        .style("fill", "teal");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 300}, ${graphHeight + topMargin * 8})`)
+                        .style("text-anchor", "middle")
+                        .text("GDP Per Capita");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", "rotate(-90)")
+                        .attr("y", 0 + margin / 2)
+                        .attr("x", 0 - (graphHeight / 2 + margin / 2))
+                        .attr("dy", "1em")
+                        .style("text-anchor", "middle")
+                        .text("Percentage of Nations With Vaccine");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 50}, ${graphHeight + topMargin})`)
+                        .style("text-anchor", "middle")
+                        .text("Africa");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 95}, ${graphHeight + topMargin - 20})`)
+                        .style("text-anchor", "middle")
+                        .text("Asia");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 135}, ${graphHeight + topMargin - 100})`)
+                        .style("text-anchor", "middle")
+                        .text("Middle East");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 170}, ${graphHeight + topMargin - 170})`)
+                        .style("text-anchor", "middle")
+                        .text("South America");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 325}, ${graphHeight + topMargin - 345})`)
+                        .style("text-anchor", "middle")
+                        .text("Europe");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 550}, ${graphHeight + topMargin - 585})`)
+                        .style("text-anchor", "middle")
+                        .text("North America");
+
+                    vizArea
+                        .append("text")
+                        .attr("transform", `translate(${margin + 570}, ${graphHeight + topMargin - 0})`)
+                        .style("text-anchor", "middle")
+                        .text("Oceania");
+
+                    vizArea
+                        .append("path")
+                        .data([stressData])
+                        .attr("class", "line")
+                        .attr("d", valueline);
+
+
+                </script>
+                <br>
+                <br>
+
+
+            </div>
+            </div>
+
+
+
+        </section>
+
+        <section class="presentation">
+
+            <div class="cover2">
+
             </div>
             <div class="intro-text">
                 <br>
@@ -359,7 +562,7 @@
             </div>
 
             <div class="cover2">
-                
+
             </div>
 
         </section>
@@ -367,7 +570,7 @@
         <section class="presentation">
 
             <div class="cover2">
-                
+
             </div>
             <div class="intro-text">
                 <br>
@@ -480,10 +683,10 @@
         <section class="presentation">
 
             <div class="cover2">
-                
+
             </div>
             <div class="intro-text">
-                
+
                 <br>
                 <br>
                 <br>
@@ -636,7 +839,7 @@
             </div>
 
             <div class="cover2">
-                
+
             </div>
 
         </section>
@@ -692,7 +895,7 @@
             </div>
 
             <div class="cover2">
-                
+
             </div>
 
         </section>
